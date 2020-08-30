@@ -51,29 +51,6 @@ var baz = { type: 'vegetable', cost: 1500, element: '🍆' };
 
 
 
-//Console.time ✅
-// console.time('Time');
-
-// let i = 0;
-// while (i <= 100000) { i++; }
-
-// console.timeEnd('Time');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //console.trace
 const saludar = (cliente) => {
   console.log('Hola, por aqui a la orden');
@@ -98,6 +75,118 @@ const saludar = (cliente) => {
 
 
 
+//Meaningful Variables
+//❌
+const us = [
+  {
+    n: "Danilo",
+    a: 25,
+    p: "Front End Developer",
+  },
+  {
+    n: "Victor",
+    a: 30,
+    p: "Back End Developer",
+  }
+];
+// console.table(us);
+
+
+
+
+
+//✅
+const users = [
+  {
+    name: "Danilo",
+    age: 25,
+    profession: "Front End Developer",
+  },
+  {
+    name: "Victor",
+    age: 30,
+    profession: "Back End Developer",
+  }
+];
+// console.table(users);
+
+
+
+
+//Distinctive constants
+//❌
+
+// const isOldEnough = (user) => {
+//   return user.age >= 26;
+// }
+
+// console.log(users.filter(isOldEnough));
+
+
+//✅
+const MAX_AGE_ALLOWED = 26;
+
+const isOldEnough = (user) => {
+  return user.age >= MAX_AGE_ALLOWED;
+}
+
+console.log(users.filter(isOldEnough));
+
+
+
+
+
+
+//Avoid Long Argumented List
+//❌
+const badRegisterUser = (name, lastname, age, birthDate, countryOfResidence) => {
+
+  //do stuff
+
+}
+
+badRegisterUser('Danilo', "Plazas", 25, "1995-08-21", "Colombia");
+
+
+
+//✅
+const goodRegisterUser = ({name, lastname, age, birthDate, countryOfResidence}) => {
+
+  // do stuff
+
+}
+
+goodRegisterUser({
+  name: 'Danilo', 
+  lastname: "Plazas", 
+  age: 25, 
+  birthDate: "1995-08-21", 
+  countryOfResidence: "Colombia", 
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -109,10 +198,10 @@ const maria = {
   profession: 'Doctor 🩺',
 };
 
-function hiClient(client) {
+function badHiClient(client) {
   const {name, age, profession} = client;
 
-  return `Hi ${name}, your age is ${age} and your profession is ${profession}`;
+  return "Hi " + name + ", your age is " + age + " and your profession is " + profession;
 }
 
 // console.log(hiClient(maria));
@@ -123,26 +212,15 @@ function hiClient(client) {
 
 
 
-
-
-
-
-
-
-
-
-
 //✅
 
-function hiClientPure(str, name, age, profession) {
-  const oldYoung = age > 30 ? 'old' : 'young';
+function goodHiClient(client) {
+  const {name, age, profession} = client;
 
-  return `${str[0]}${name}, you are ${oldYoung} and your profession is ${profession}`;
+  return `Hi ${name}, your age is ${age} and your profession is ${profession}`;
 }
 
-const str = hiClientPure`Hi ${maria.name}${maria.age}${maria.profession}`;
-
-// console.log(str);
+// console.log(goodHiClient(maria));
 
 
 
@@ -229,16 +307,13 @@ const betterEatOrNotEat = (element) => {
 
 
 
+
 const eatable = [
 'fruit', 'vegetable', 'protein','rice'
 ];
 const notEatable = [
 'wooden', 'bed'
 ];
-
-
-
-
 
 //✅ → Array
 const theBestEatOrNotEat = (element) => {
